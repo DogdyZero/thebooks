@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>The Books - Lista de Livros</title>
+</h:head>
+<h:body>
+		<h:form>
+		 	<h:panelGrid columns="5" cellpadding="3">
+		 		<h:outputText value="Estilo: " />
+		 	
+		 		<p:selectOneMenu style="width:150px" value="#{livroController.opcao}">
+                	<f:selectItem itemLabel="Selecione uma opção" itemValue="" noSelectionOption="true" />
+                	<f:selectItems value="#{livroController.opcoes}" />
+            	</p:selectOneMenu>
+		        <h:outputText value="Consultar: " />
+		        <p:inputText value="#{livroController.pesquisa}">
+		        </p:inputText>
+				<p:commandButton id = "submit" value = "Submit" style="width:150px;" icon="pi pi-check" action="#{livroController.consulta}"/>
+
+			</h:panelGrid>
+			
+		</h:form>
+		
+	<p:tab title="Lista de Livros">
+		<p:dataTable var="livro" value="#{livroController.livros}"
+		 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                 paginator="true" rows="10" style="margin-bottom:20px">
+	    	<p:column headerText="Nome Livro">
+	        <h:outputText value="#{livro.nomeLivro}" />
+	   	</p:column>
+	 
+	    <p:column headerText="Páginas">
+	        <h:outputText value="#{livro.paginas}" />
+	    </p:column>
+	 
+	    <p:column headerText="Estilo livro">
+	        <h:outputText value="#{livro.estilo.categoriaLivro}" />
+	    </p:column>
+	 
+		</p:dataTable>
+		
+	</p:tab>
+</h:body>
+</html>

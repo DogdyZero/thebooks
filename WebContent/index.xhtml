@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>The Books - Login</title>
+</h:head>
+<h:body>
+
+<p:accordionPanel>
+	<p:tab title="Login">
+		<h:form>
+		 	<h:panelGrid columns="2" cellpadding="3">
+		        <h:outputText value="Login: " />
+		        <p:inputText value="#{usuarioController.usuario.login}">
+		        </p:inputText>
+		        <h:outputText value="Senha: " />
+		      	<p:password value="#{usuarioController.usuario.senha}">
+		        </p:password>
+			</h:panelGrid>
+			<p:commandButton id = "submit" value = "Submit" style="width:100px;" icon="pi pi-check" action="#{usuarioController.logar}"/>
+			
+		</h:form>
+	</p:tab>
+	
+	<p:tab title="Novo Usuário">
+				<h:form>
+		 	<h:panelGrid columns="2" cellpadding="3">
+		        <h:outputText value="Digite um login: " />
+		        <p:inputText value="#{usuarioController.usuario.login}">
+		        </p:inputText>
+		        <h:outputText value="Senha: " />
+		      	<p:password id="pwd1" match="pwd2" value="#{usuarioController.usuario.senha}" required="true" >
+		        </p:password>
+		        <h:outputText value="Repita a Senha: " />
+		        <p:password id="pwd2" value="#{usuarioController.usuario.senha}" required="true" >
+		        </p:password>
+			</h:panelGrid>
+			<p:commandButton id = "submit" value = "Submit" style="width:100px;" ajax="false" icon="pi pi-check" action="#{usuarioController.salvar}"/>
+			
+		</h:form>
+	</p:tab>
+</p:accordionPanel>
+
+</h:body>
+</html>

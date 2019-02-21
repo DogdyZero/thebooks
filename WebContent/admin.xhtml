@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>The Books - Admin</title>
+</h:head>
+<h:body>
+<h:outputText value="Perfil Administrador" />
+<p:accordionPanel>
+	<p:tab title="Cadastrar Novo Livro">
+		<h:form>
+		 	<h:panelGrid columns="2" cellpadding="3">
+		        <h:outputText value="Nome do Livro: " />
+		        <p:inputText value="#{livroController.livro.nomeLivro}" style="width:400px">
+		        </p:inputText>
+		        <h:outputText value="Páginas: " />
+		      	<p:inputText value="#{livroController.livro.paginas}" style="width:150px">
+		        </p:inputText>
+		        <h:outputText value="Estilo: " />
+		        <p:selectOneMenu style="width:150px" value="#{livroController.estilo.categoriaLivro}">
+		        	<p:outputLabel for="country" value="Tipo Livro: " />
+                	<f:selectItem itemLabel="Selecione o Estilo" itemValue="" noSelectionOption="true" />
+                	<f:selectItems value="#{livroController.listaEstilos}" />
+            	</p:selectOneMenu>
+
+			</h:panelGrid>
+			<p:commandButton id = "submit" value = "Submit" style="width:100px;" icon="pi pi-check" action="#{livroController.salvar}" ajax="true"/>
+			
+		</h:form>
+	</p:tab>
+	
+	<p:tab title="Lista de Livros">
+		<p:dataTable var="livro" value="#{livroController.livros}"
+		 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                 paginator="true" rows="10" style="margin-bottom:20px">
+	    	<p:column headerText="Nome Livro">
+	        <h:outputText value="#{livro.nomeLivro}" />
+	   	</p:column>
+	 
+	    <p:column headerText="Páginas">
+	        <h:outputText value="#{livro.paginas}" />
+	    </p:column>
+	 
+	    <p:column headerText="Estilo livro">
+	        <h:outputText value="#{livro.estilo.categoriaLivro}" />
+	    </p:column>
+	 
+		</p:dataTable>
+		
+		
+		
+	</p:tab>
+</p:accordionPanel>
+</h:body>
+</html>
