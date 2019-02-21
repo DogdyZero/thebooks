@@ -34,7 +34,7 @@ public class UsuarioController {
 				this.usuario = (Usuario)resultado.get(0);
 				
 				if(this.usuario.getPerfil().equals("normal"))
-					FacesContext.getCurrentInstance().getExternalContext().redirect("lista-livros.html");
+					FacesContext.getCurrentInstance().getExternalContext().redirect("lista-livros.xhtml");
 				else if (this.usuario.getPerfil().equals("admin"))
 					FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
 
@@ -44,7 +44,7 @@ public class UsuarioController {
 		}
 	}
 	public void salvar() {
-		this.usuario.setPerfil("admin");
+		this.usuario.setPerfil("normal");
 		this.facede = new Facede(this.usuario);
 		String resultado = this.facede.salvar(this.usuario);
 		if(resultado !=null){

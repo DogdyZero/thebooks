@@ -33,12 +33,16 @@ public class LivroQuery implements IFactoryQuery {
 			
 			if(this.livro.getEstilo() !=null) {
 				List<Object> listTipoEstilo = new ArrayList<Object>();
-				mapQuery.put("estilo", "from Livro l inner join l.estilo as estilo"
-						+ " where estilo.categoria like :param1");
+				//mapQuery.put("estilo", "from Livro l INNER JOIN l.estilo e"
+				//		+ " where e.categoria like :param1");
+				mapQuery.put("estilo", ""
+						+ "from Livro "
+						+ "where estilo.categoriaLivro like :param1");
+				
 				listTipoEstilo.add("%" + this.livro.getEstilo().getCategoriaLivro() + "%");
-				//listTipoEstilo.add(this.livro.getEstilo().getId());
 
 				mapParameters.put("estilo", listTipoEstilo);
+				
 			}
 			
 		}
