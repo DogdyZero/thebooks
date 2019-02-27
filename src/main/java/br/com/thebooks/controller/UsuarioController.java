@@ -32,7 +32,8 @@ public class UsuarioController {
 		if(resultado !=null){
 			try {
 				this.usuario = (Usuario)resultado.get(0);
-				
+				FacesContext.getCurrentInstance().getExternalContext().
+					getSessionMap().put("usuario", this.usuario);
 				if(this.usuario.getPerfil().equals("normal"))
 					FacesContext.getCurrentInstance().getExternalContext().redirect("lista-livros.xhtml");
 				else if (this.usuario.getPerfil().equals("admin"))

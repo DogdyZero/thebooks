@@ -15,7 +15,7 @@ public class UsuarioQuery implements IFactoryQuery{
 	private Map<String,List<Object>> mapParameters;
 
 	public UsuarioQuery(EntidadeDominio entidade) {
-		if(entidade.getClass().getName().equals("br.com.thebooks.domain.Usuario")) {
+		if(entidade.getClass().getSimpleName().equals("Usuario")) {
 			this.usuario = (Usuario) entidade;
 			mapQuery = new HashMap<String,String>();
 			mapParameters = new HashMap<String,List<Object>>();

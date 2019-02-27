@@ -42,6 +42,13 @@
 	        <h:outputText value="#{livro.estilo.categoriaLivro}" />
 	    </p:column>
 	 
+	     <p:column headerText="Visualizar">
+				<p:commandButton id = "marcar" value = "Já li" action="#{livroController.esseEuJaLi(livro)}" icon="fa-angle-right" >
+				
+				</p:commandButton>
+	    </p:column>
+	 
+	 
 		</p:dataTable>
 		
 	</p:tab>

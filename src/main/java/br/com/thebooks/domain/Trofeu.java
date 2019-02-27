@@ -10,49 +10,36 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Livro extends EntidadeDominio {
+public class Trofeu extends EntidadeDominio {
 	@Id
 	@GeneratedValue
-	@Column(name="id_livro")
+	@Column(name="id_trofeu")
 	private int id;
-	@Column(name="nome_livro")
-	private String nomeLivro;
-	private int paginas;
+	private String nome;
+	@Column(name="path_livro")
+	private String pathImgTrofeu;
 	@OneToOne(cascade=CascadeType.ALL,
 			fetch = FetchType.EAGER)
 	@JoinColumn(name="id_estilo")
 	private Estilo estilo;
 	
-	public Livro() {}
-	
-	public Livro(Estilo estilo) {
-		super();
-		this.estilo = estilo;
-	}
-
-	public Livro(String nomeLivro, int paginas, Estilo estilo) {
-		super();
-		this.nomeLivro = nomeLivro;
-		this.paginas = paginas;
-		this.estilo = estilo;
-	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNomeLivro() {
-		return nomeLivro;
+	public String getNome() {
+		return nome;
 	}
-	public void setNomeLivro(String nomeLivro) {
-		this.nomeLivro = nomeLivro;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	public int getPaginas() {
-		return paginas;
+	public String getPathImgTrofeu() {
+		return pathImgTrofeu;
 	}
-	public void setPaginas(int paginas) {
-		this.paginas = paginas;
+	public void setPathImgTrofeu(String pathImgTrofeu) {
+		this.pathImgTrofeu = pathImgTrofeu;
 	}
 	public Estilo getEstilo() {
 		return estilo;
@@ -60,7 +47,7 @@ public class Livro extends EntidadeDominio {
 	public void setEstilo(Estilo estilo) {
 		this.estilo = estilo;
 	}
-
+	
 	
 	
 	

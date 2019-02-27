@@ -17,5 +17,8 @@
         <mapping class="br.com.thebooks.domain.Usuario" />
         <mapping class="br.com.thebooks.domain.Livro" />
         <mapping class="br.com.thebooks.domain.Estilo" />
+        <mapping class="br.com.thebooks.domain.Trofeu" />
+        <mapping class="br.com.thebooks.domain.Leitura" />
+        
     </session-factory>
 </hibernate-configuration>

@@ -3,19 +3,21 @@ package br.com.thebooks.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.thebooks.domain.EntidadeDominio;
 import br.com.thebooks.domain.Estilo;
+import br.com.thebooks.domain.Leitura;
 import br.com.thebooks.domain.Livro;
 import br.com.thebooks.domain.Usuario;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class LivroController {
 	private String opcao;
 	private String pesquisa;
@@ -24,6 +26,7 @@ public class LivroController {
 	private Facede facede;
 	private List<String> listaEstilos;
 	private List<Livro> livros;
+	private Usuario usuario;
 
 	private List<String> opcoes;
 	List<EntidadeDominio> resultado;
@@ -34,6 +37,9 @@ public class LivroController {
 	}
 	@PostConstruct
 	public void init() {
+		this.usuario =(Usuario)FacesContext.getCurrentInstance().
+				getExternalContext().getSessionMap().get("usuario");
+		
 		this.facede = new Facede(estilo);
 		this.resultado = this.facede.listaEntidades(estilo, "simples");
 		if(resultado!=null) {
@@ -114,6 +120,21 @@ public class LivroController {
 				}	
 			}
 
+		}
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		Map<String,Object> map =facesContext.getExternalContext().getSessionMap();
+		
+		
+	}
+	public void esseEuJaLi(Livro livro) {
+		if(this.usuario!=null) {
+			Leitura leitura = new Leitura();
+			leitura.setLeitura(true);
+			leitura.setUsuario(this.usuario);
+			leitura.setLivro(livro);
+			facede = new Facede(leitura);
+			String resultado = facede.salvar(leitura);
+			
 		}
 	}
 	
