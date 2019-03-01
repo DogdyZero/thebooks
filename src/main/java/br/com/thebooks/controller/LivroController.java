@@ -17,7 +17,7 @@ import br.com.thebooks.domain.Livro;
 import br.com.thebooks.domain.Usuario;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class LivroController {
 	private String opcao;
 	private String pesquisa;
