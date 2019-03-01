@@ -68,7 +68,7 @@
             <plugin>
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>${version.jboss.maven.plugin}</version>
+                <version>7.4.Final</version>
             </plugin>
         </plugins>
     </build>
