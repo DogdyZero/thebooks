@@ -10,11 +10,16 @@
 </h:head>
 <h:body>
 		<h:form>
-		 	<h:panelGrid columns="5" cellpadding="3">
+			<h:panelGrid columns="1" cellpadding="3">
+					<h:outputText value="#{livroController.mensagem}" />		
+			</h:panelGrid>
+		 	<h:panelGrid columns="7" cellpadding="3">
+		 				 <h:outputText value="Livros que li: " />
+					<h:selectBooleanCheckbox id="livroslidos" value="#{livroController.livrosLidos}" /> 
 		 		<h:outputText value="Estilo: " />
 		 	
 		 		<p:selectOneMenu style="width:150px" value="#{livroController.opcao}">
-                	<f:selectItem itemLabel="Selecione uma opção" itemValue="" noSelectionOption="true" />
+                	<f:selectItem itemLabel="Selecione " itemValue="" noSelectionOption="true" />
                 	<f:selectItems value="#{livroController.opcoes}" />
             	</p:selectOneMenu>
 		        <h:outputText value="Consultar: " />

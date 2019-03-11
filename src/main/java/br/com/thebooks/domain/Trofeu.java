@@ -1,5 +1,7 @@
 package br.com.thebooks.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Trofeu extends EntidadeDominio {
@@ -18,10 +21,15 @@ public class Trofeu extends EntidadeDominio {
 	private String nome;
 	@Column(name="path_livro")
 	private String pathImgTrofeu;
-	@OneToOne(cascade=CascadeType.ALL,
-			fetch = FetchType.EAGER)
-	@JoinColumn(name="id_estilo")
-	private Estilo estilo;
+	
+	@ManyToMany (cascade=CascadeType.ALL,
+			fetch=FetchType.LAZY)
+	@JoinTable(name="usuario_trofeu",
+			joinColumns={@JoinColumn(name="id_trofeu", 
+            referencedColumnName="id_trofeu")},  
+           inverseJoinColumns={@JoinColumn(name="id_usuario", 
+           referencedColumnName="id_usuario")})
+	private List<Usuario> usuarios;
 	
 	public int getId() {
 		return id;
@@ -41,14 +49,12 @@ public class Trofeu extends EntidadeDominio {
 	public void setPathImgTrofeu(String pathImgTrofeu) {
 		this.pathImgTrofeu = pathImgTrofeu;
 	}
-	public Estilo getEstilo() {
-		return estilo;
+	public List<Usuario> getUsuarios() {
+		return usuarios;
 	}
-	public void setEstilo(Estilo estilo) {
-		this.estilo = estilo;
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
-	
-	
 	
 	
 }

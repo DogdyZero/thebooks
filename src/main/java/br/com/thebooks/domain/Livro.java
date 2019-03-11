@@ -1,5 +1,7 @@
 package br.com.thebooks.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -22,6 +26,15 @@ public class Livro extends EntidadeDominio {
 			fetch = FetchType.EAGER)
 	@JoinColumn(name="id_estilo")
 	private Estilo estilo;
+	
+	@ManyToMany (cascade=CascadeType.ALL,
+			fetch=FetchType.LAZY)
+	@JoinTable(name="usuario_livro",
+			 joinColumns={@JoinColumn(name="id_livro", 
+	            referencedColumnName="id_livro")},  
+	           inverseJoinColumns={@JoinColumn(name="id_usuario", 
+	           referencedColumnName="id_usuario")})
+	private List<Usuario> usuarios;
 	
 	public Livro() {}
 	
@@ -59,6 +72,14 @@ public class Livro extends EntidadeDominio {
 	}
 	public void setEstilo(Estilo estilo) {
 		this.estilo = estilo;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	

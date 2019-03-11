@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.thebooks.domain.EntidadeDominio;
 import br.com.thebooks.domain.Estilo;
-import br.com.thebooks.domain.Leitura;
 import br.com.thebooks.domain.Livro;
 import br.com.thebooks.domain.Usuario;
 
@@ -27,6 +27,8 @@ public class LivroController {
 	private List<String> listaEstilos;
 	private List<Livro> livros;
 	private Usuario usuario;
+	private boolean livrosLidos;
+	private String mensagem;
 
 	private List<String> opcoes;
 	List<EntidadeDominio> resultado;
@@ -82,7 +84,35 @@ public class LivroController {
 		}
 	}
 	public void consulta() {
-		if(opcao.equals("por nome")) {
+		this.mensagem =null;
+		if(livrosLidos==true) {
+			if(this.usuario!=null) {
+				this.facede = new Facede(this.usuario);
+				this.resultado = this.facede.listaEntidades(this.usuario, "id");
+				this.usuario = (Usuario) resultado.get(0);
+				livros = new ArrayList<Livro>();
+				List<Livro> liv = this.usuario.getLivros();
+				
+				if(opcao.equals("por nome")){
+
+					for(EntidadeDominio entidade : liv) {
+						Livro l2 =(Livro) entidade;
+						if(l2.getNomeLivro().contains(pesquisa)) 
+							livros.add(l2);
+					}
+				} else if(opcao.equals("por estilo")){
+					for(EntidadeDominio entidade : liv) {
+						Livro l2 =(Livro) entidade;
+						if(l2.getEstilo().getCategoriaLivro().contains(pesquisa)) 
+							livros.add(l2);
+					}
+				}
+			}
+			
+		}
+		
+		if(opcao.equals("por nome") &&
+				livrosLidos==false) {
 			Livro livro = new Livro();
 			livro.setNomeLivro(pesquisa);
 			facede = new Facede(livro);
@@ -93,13 +123,9 @@ public class LivroController {
 					Livro l2 =(Livro) entidade;
 					livros.add(l2);
 				}
-				try {
-					FacesContext.getCurrentInstance().getExternalContext().redirect("lista-livros.xhtml");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}	
 			}
-		} else if(opcao.equals("por estilo")) {
+		} else if(opcao.equals("por estilo") &&
+				livrosLidos==false) {
 			Estilo e = new Estilo();
 			e.setCategoriaLivro(pesquisa);
 			Livro l = new Livro();
@@ -113,29 +139,40 @@ public class LivroController {
 					Livro l2 =(Livro) entidade;
 					livros.add(l2);
 				}
-				try {
-					FacesContext.getCurrentInstance().getExternalContext().redirect("lista-livros.xhtml");
-				} catch (IOException e2) {
-					e2.printStackTrace();
-				}	
+
 			}
 
 		}
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		Map<String,Object> map =facesContext.getExternalContext().getSessionMap();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("lista-livros.xhtml");
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}	
+
 		
 		
 	}
 	public void esseEuJaLi(Livro livro) {
-		if(this.usuario!=null) {
-			Leitura leitura = new Leitura();
-			leitura.setLeitura(true);
-			leitura.setUsuario(this.usuario);
-			leitura.setLivro(livro);
-			facede = new Facede(leitura);
-			String resultado = facede.salvar(leitura);
+		if(this.usuario!=null &&
+				livrosLidos==false) {
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			usuarios.add(this.usuario);
+			livro.setUsuarios(usuarios);
+			//List<Livro> livros = new ArrayList<Livro>();
+			//livros.add(livro);
+		
+			//this.usuario.setLivros(livros);
+			this.facede.alterar(livro);
+			
+		} else if (livrosLidos==true) {
+			this.mensagem = "você não tem como marcar novamente o livro!";
 			
 		}
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("lista-livros.xhtml");
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}	
 	}
 	
 	public Estilo getEstilo() {
@@ -182,6 +219,20 @@ public class LivroController {
 	public void setPesquisa(String pesquisa) {
 		this.pesquisa = pesquisa;
 	}
+	public boolean isLivrosLidos() {
+		return livrosLidos;
+	}
+	public void setLivrosLidos(boolean livrosLidos) {
+		this.livrosLidos = livrosLidos;
+	}
+	public String getMensagem() {
+		return mensagem;
+	}
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+	
+	
 	
 	
 

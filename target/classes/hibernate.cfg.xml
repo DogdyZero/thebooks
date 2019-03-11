@@ -7,7 +7,10 @@
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.username">douglas</property>
         <property name="hibernate.connection.password">gomes</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://172.30.144.173:5432/thebooks</property>
+        <!--  <property name="hibernate.connection.url">jdbc:postgresql://172.30.144.173:5432/thebooks</property> -->
+       
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/thebooks</property>
+        
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">false</property>
@@ -18,7 +21,6 @@
         <mapping class="br.com.thebooks.domain.Livro" />
         <mapping class="br.com.thebooks.domain.Estilo" />
         <mapping class="br.com.thebooks.domain.Trofeu" />
-        <mapping class="br.com.thebooks.domain.Leitura" />
         
     </session-factory>
 </hibernate-configuration>

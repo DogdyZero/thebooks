@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.thebooks.domain.EntidadeDominio;
+import br.com.thebooks.domain.Livro;
 import br.com.thebooks.domain.Usuario;
 
 public class UsuarioQuery implements IFactoryQuery{
@@ -31,6 +32,7 @@ public class UsuarioQuery implements IFactoryQuery{
 			listLogin.add(this.usuario.getLogin());
 			listLogin.add(this.usuario.getSenha());
 			mapParameters.put("login", listLogin);
+			
 		}
 		
 	}

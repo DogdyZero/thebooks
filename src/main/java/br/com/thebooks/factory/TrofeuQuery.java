@@ -20,7 +20,6 @@ public class TrofeuQuery implements IFactoryQuery {
 			mapQuery = new HashMap<String,String>();
 			mapParameters = new HashMap<String,List<Object>>();
 			
-
 		}
 		
 	}
