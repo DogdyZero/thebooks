@@ -12,6 +12,7 @@ import br.com.thebooks.domain.Trofeu;
 import br.com.thebooks.domain.Usuario;
 import br.com.thebooks.negocio.IStrategy;
 import br.com.thebooks.negocio.PontuacaoStrategy;
+import br.com.thebooks.negocio.TrofeuStrategy;
 import br.com.thebooks.persistence.EstiloDAO;
 import br.com.thebooks.persistence.IDAO;
 import br.com.thebooks.persistence.LivroDAO;
@@ -34,7 +35,9 @@ public class Facede {
 		
 		List<IStrategy> listAlterarStrategy = new ArrayList<IStrategy>();
 		PontuacaoStrategy pontuacaoStrategy = new PontuacaoStrategy();
+		//TrofeuStrategy trofeuStrategy = new TrofeuStrategy();
 		listAlterarStrategy.add(pontuacaoStrategy);
+		//listAlterarStrategy.add(trofeuStrategy);
 		rns.put("ALTERAR",listAlterarStrategy);
 
 	}

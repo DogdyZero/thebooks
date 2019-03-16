@@ -27,6 +27,7 @@ public class LivroController {
 	private List<String> listaEstilos;
 	private List<Livro> livros;
 	private Usuario usuario;
+	private List<Usuario> usuarios;
 	private boolean livrosLidos;
 	private String mensagem;
 
@@ -64,7 +65,18 @@ public class LivroController {
 		opcoes = new ArrayList<String>();
 		opcoes.add("por nome");
 		opcoes.add("por estilo");
-
+		
+		Usuario user = new Usuario();
+		user.setPerfil("normal");
+		this.facede = new Facede(user);
+		List<EntidadeDominio> listaUsuario = this.facede.listaEntidades(user, "ranking");
+		if(listaUsuario!=null) {
+			usuarios = new ArrayList<Usuario>();
+			for(EntidadeDominio entidade : listaUsuario) {
+				Usuario u2 =(Usuario) entidade;
+				usuarios.add(u2);
+			}
+		}
 	}
 	public void salvar() {
 		for(EntidadeDominio entidade: this.resultado) {
@@ -139,9 +151,7 @@ public class LivroController {
 					Livro l2 =(Livro) entidade;
 					livros.add(l2);
 				}
-
 			}
-
 		}
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("lista-livros.xhtml");
@@ -153,16 +163,43 @@ public class LivroController {
 		
 	}
 	public void esseEuJaLi(Livro livro) {
+		this.mensagem=null;
 		if(this.usuario!=null &&
 				livrosLidos==false) {
-			List<Usuario> usuarios = new ArrayList<Usuario>();
-			usuarios.add(this.usuario);
-			livro.setUsuarios(usuarios);
-			//List<Livro> livros = new ArrayList<Livro>();
-			//livros.add(livro);
-		
-			//this.usuario.setLivros(livros);
-			this.facede.alterar(livro);
+			List<Livro> meusLivros = this.usuario.getLivros();
+			List<Livro> novaLista = new ArrayList<Livro>();
+
+
+			for(Livro l :meusLivros) {
+				if(livro.getNomeLivro().equals(l.getNomeLivro())) {
+					this.mensagem = "você não tem como marcar novamente o livro!";
+					return;
+				}
+			}
+			novaLista = meusLivros;
+			novaLista.add(livro);
+			//meusLivros.add(livro);
+
+			/*Usuario novoUsuario = new Usuario();
+			novoUsuario.setId(this.usuario.getId());
+			novoUsuario.setLogin(this.usuario.getLogin());
+			novoUsuario.setPerfil(this.usuario.getPerfil());
+			novoUsuario.setPontos(this.usuario.getPontos());
+			novoUsuario.setSenha(this.usuario.getSenha());
+
+			List<Livro> novaLista = new ArrayList<Livro>();
+			for (Livro l :meusLivros){
+				Livro novoLivro = new Livro();
+				novoLivro.setId(livro.getId());
+				novoLivro.setNomeLivro(livro.getNomeLivro());
+				novoLivro.setPaginas(livro.getPaginas());
+				novaLista.add(novoLivro);
+			}
+						
+			novoUsuario.setLivros(novaLista);*/
+			this.usuario.setLivros(novaLista);
+			this.facede = new Facede(this.usuario);
+			this.facede.alterar(this.usuario);
 			
 		} else if (livrosLidos==true) {
 			this.mensagem = "você não tem como marcar novamente o livro!";
@@ -230,6 +267,12 @@ public class LivroController {
 	}
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
+	}
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 	
 	

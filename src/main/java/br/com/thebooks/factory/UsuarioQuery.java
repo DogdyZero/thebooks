@@ -33,6 +33,12 @@ public class UsuarioQuery implements IFactoryQuery{
 			listLogin.add(this.usuario.getSenha());
 			mapParameters.put("login", listLogin);
 			
+			List<Object> listRanking = new ArrayList<Object>();
+			mapQuery.put("ranking", "from Usuario user where perfil = :param1 "
+					+ " order by user.pontos desc");
+			listRanking.add(this.usuario.getPerfil());
+			mapParameters.put("ranking", listRanking);
+			
 		}
 		
 	}

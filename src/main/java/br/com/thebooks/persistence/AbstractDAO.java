@@ -31,8 +31,8 @@ public abstract class AbstractDAO implements IDAO{
 	
 	@Override
 	public String salvar(EntidadeDominio entidade) {
-		iniciarTransacao();
 		try {
+			iniciarTransacao();
 			this.session.save(entidade);
 			finalizarTransacao();
 		} catch (Exception e) {
@@ -43,9 +43,10 @@ public abstract class AbstractDAO implements IDAO{
 	}
 	@Override
 	public String alterar(EntidadeDominio entidade) {
-		iniciarTransacao();
 		try {
+			iniciarTransacao();
 			this.session.update(entidade);
+
 			finalizarTransacao();
 		} catch (Exception e) {
 			return e.toString();

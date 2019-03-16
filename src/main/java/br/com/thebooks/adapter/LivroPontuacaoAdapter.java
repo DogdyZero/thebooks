@@ -6,11 +6,11 @@ import br.com.thebooks.domain.EntidadeDominio;
 import br.com.thebooks.domain.Livro;
 import br.com.thebooks.domain.Usuario;
 
-public class LivroAdapter implements IAdapter {
+public class LivroPontuacaoAdapter implements IAdapter {
 	private Livro livro;
 
 	@Override
-	public int processarPaginas(EntidadeDominio entidade) {
+	public int processar(EntidadeDominio entidade) {
 		this.livro = (Livro)entidade;
 		return livro.getPaginas();		
 	}
