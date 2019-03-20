@@ -5,6 +5,15 @@
       xmlns:f="http://java.sun.com/jsf/core"
        xmlns:p="http://primefaces.org/ui">
 <h:head>
+<style>
+.aviso{
+border-radius:5px;
+background-color:#7FFFD4;
+width: 100%;
+padding-left: 10px;
+font-weight: bold;
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>The Books - Lista de Livros</title>
 </h:head>
@@ -12,8 +21,8 @@
 <p:accordionPanel>
 	<p:tab title="Lista de Livros">
 		<h:form>
-			<h:panelGrid columns="1" cellpadding="3">
-					<h:outputText value="#{livroController.mensagem}" />		
+			<h:panelGrid  rendered="#{not empty livroController.mensagem}" columns="1" cellpadding="3" styleClass="aviso">
+					<h:outputText value="#{livroController.mensagem}"  />		
 			</h:panelGrid>
 		 	<h:panelGrid columns="7" cellpadding="3">
 		 				 <h:outputText value="Livros que li: " />
@@ -75,6 +84,15 @@
 		</p:dataTable>
 	</p:tab>
 	<p:tab title="Meus Troféus">
+			<p:dataTable var="trofeu" value="#{livroController.trofeus}"
+			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+	                 paginator="true" rows="10" style="margin-bottom:20px">
+		    	<p:column headerText="Nome do trofeu">
+		        <h:outputText value="#{trofeu.nome}" />
+		   	</p:column>
+	 
+		</p:dataTable>
+	
 	</p:tab>
 	</p:accordionPanel>
 </h:body>

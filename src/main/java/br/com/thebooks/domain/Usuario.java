@@ -23,7 +23,7 @@ public class Usuario extends EntidadeDominio{
 	private String perfil;
 	private int pontos;
 	@ManyToMany (cascade=CascadeType.ALL,
-			fetch=FetchType.LAZY)
+			fetch=FetchType.EAGER)
 	@JoinTable(name="usuario_trofeu",
 			joinColumns={@JoinColumn(name="id_usuario", 
             referencedColumnName="id_usuario")},  

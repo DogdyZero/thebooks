@@ -20,6 +20,13 @@ public class TrofeuQuery implements IFactoryQuery {
 			mapQuery = new HashMap<String,String>();
 			mapParameters = new HashMap<String,List<Object>>();
 			
+			List<Object> listTrofeuPorNome = new ArrayList<Object>();
+			mapQuery.put("trofeu", "from Trofeu "
+					+ "where nome like :param1");
+			
+			listTrofeuPorNome.add("%" + this.trofeu.getNome() + "%");
+
+			mapParameters.put("trofeu", listTrofeuPorNome);
 		}
 		
 	}

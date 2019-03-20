@@ -22,8 +22,7 @@ public class Livro extends EntidadeDominio {
 	@Column(name="nome_livro")
 	private String nomeLivro;
 	private int paginas;
-	@OneToOne(cascade=CascadeType.ALL,
-			fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_estilo")
 	private Estilo estilo;
 	

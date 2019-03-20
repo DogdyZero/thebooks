@@ -35,9 +35,9 @@ public class Facede {
 		
 		List<IStrategy> listAlterarStrategy = new ArrayList<IStrategy>();
 		PontuacaoStrategy pontuacaoStrategy = new PontuacaoStrategy();
-		//TrofeuStrategy trofeuStrategy = new TrofeuStrategy();
+		TrofeuStrategy trofeuStrategy = new TrofeuStrategy();
 		listAlterarStrategy.add(pontuacaoStrategy);
-		//listAlterarStrategy.add(trofeuStrategy);
+		listAlterarStrategy.add(trofeuStrategy);
 		rns.put("ALTERAR",listAlterarStrategy);
 
 	}
