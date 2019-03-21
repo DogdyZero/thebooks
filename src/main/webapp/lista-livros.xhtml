@@ -84,14 +84,18 @@ font-weight: bold;
 		</p:dataTable>
 	</p:tab>
 	<p:tab title="Meus Troféus">
-			<p:dataTable var="trofeu" value="#{livroController.trofeus}"
-			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
-	                 paginator="true" rows="10" style="margin-bottom:20px">
-		    	<p:column headerText="Nome do trofeu">
-		        <h:outputText value="#{trofeu.nome}" />
-		   	</p:column>
-	 
-		</p:dataTable>
+        <p:dataGrid var="trofeu" value="#{livroController.trofeus}" columns="3" layout="grid"
+        rows="12" paginator="true" id="cars"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+	        	<p:panel header="#{trofeu.nome}" style="text-align:center">
+	            	<h:panelGrid columns="1" style="width:100%">
+	             	<p:graphicImage library="imagens" name="#{trofeu.pathImgTrofeu}" style="width:100%;"/> 
+	             
+	             
+	             	</h:panelGrid>     
+	            </p:panel>     
+ 
+		</p:dataGrid>
 	
 	</p:tab>
 	</p:accordionPanel>

@@ -23,7 +23,7 @@ public class Trofeu extends EntidadeDominio {
 	private String pathImgTrofeu;
 	
 	@ManyToMany (cascade=CascadeType.ALL,
-			fetch=FetchType.EAGER)
+			fetch=FetchType.LAZY)
 	@JoinTable(name="usuario_trofeu",
 			joinColumns={@JoinColumn(name="id_trofeu", 
             referencedColumnName="id_trofeu")},  

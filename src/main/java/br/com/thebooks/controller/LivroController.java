@@ -97,6 +97,7 @@ public class LivroController {
 		String resultado = this.facede.salvar(this.livro);
 		if(resultado ==null){
 			try {
+				this.livros.add(this.livro);
 				FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
 			} catch (IOException e) {
 				e.printStackTrace();

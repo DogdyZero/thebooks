@@ -27,7 +27,7 @@ public class Livro extends EntidadeDominio {
 	private Estilo estilo;
 	
 	@ManyToMany (cascade=CascadeType.ALL,
-			fetch=FetchType.LAZY)
+			fetch=FetchType.EAGER)
 	@JoinTable(name="usuario_livro",
 			 joinColumns={@JoinColumn(name="id_livro", 
 	            referencedColumnName="id_livro")},  
