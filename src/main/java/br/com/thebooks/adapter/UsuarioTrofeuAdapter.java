@@ -18,9 +18,10 @@ public class UsuarioTrofeuAdapter implements IAdapter {
 			return 0;
 		this.usuario =(Usuario)entidade;
 		List<Livro> livros = this.usuario.getLivros();
-		this.categoriaAtual = livros.get(0).getEstilo().getCategoriaLivro();
+		int size = livros.size()-1;
+		this.categoriaAtual = livros.get(size).getEstilo().getCategoriaLivro();
 		for(Livro livro :livros) {
-			if(this.usuario.getLivros().get(0).getEstilo().getCategoriaLivro().
+			if(livro.getEstilo().getCategoriaLivro().
 					equals(this.categoriaAtual)) {
 				contador++;
 			}
