@@ -16,11 +16,9 @@ public abstract class AbstractDAO implements IDAO{
 	protected IFactoryQuery fabricaQuery;
 	protected EntidadeDominio entidade;
 	protected Session session;
-	private SessionFactory novaConfiguracao() {
-		return new Configuration().configure().buildSessionFactory();
-	}
 	protected void iniciarTransacao() {
-		this.session = novaConfiguracao().openSession();
+		SessionSingleton ss = SessionSingleton.getInstanceSession();
+		this.session = ss.getInstanceSessionFactory().openSession();
 		this.session.beginTransaction();
 	}
 	protected void finalizarTransacao() {
