@@ -5,11 +5,12 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.username">douglas</property>
-        <property name="hibernate.connection.password">gomes</property>
+        <property name="hibernate.connection.username">smfsisrgjwgneh</property>
+        <property name="hibernate.connection.password">32897b96061389440fa9f0bf2ed78c9e867c34b8345b6618eed60a9ac5fb3644</property>
         <!--  <property name="hibernate.connection.url">jdbc:postgresql://172.30.144.173:5432/thebooks</property> -->
        
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/thebooks</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://
+postgres://smfsisrgjwgneh:32897b96061389440fa9f0bf2ed78c9e867c34b8345b6618eed60a9ac5fb3644@ec2-54-227-245-146.compute-1.amazonaws.com:5432/dfl0u3t3h30d9r</property>
         
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.show_sql">true</property>
