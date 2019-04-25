@@ -31,6 +31,14 @@ public class Trofeu extends EntidadeDominio {
            referencedColumnName="id_usuario")})
 	private List<Usuario> usuarios;
 	
+	
+	public Trofeu() {
+	}
+	public Trofeu(String nome, String pathImgTrofeu) {
+		super();
+		this.nome = nome;
+		this.pathImgTrofeu = pathImgTrofeu;
+	}
 	public int getId() {
 		return id;
 	}

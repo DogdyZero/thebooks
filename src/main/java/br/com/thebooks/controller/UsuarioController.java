@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.thebooks.domain.EntidadeDominio;
 import br.com.thebooks.domain.Estilo;
+import br.com.thebooks.domain.Trofeu;
 import br.com.thebooks.domain.Usuario;
 
 @ManagedBean
@@ -96,12 +97,33 @@ public class UsuarioController {
 			estilos.add(new Estilo("ficcao cientifica"));
 			estilos.add(new Estilo("romance"));
 			estilos.add(new Estilo("aventura"));
-
+			estilos.add(new Estilo("comédia"));
+			estilos.add(new Estilo("ação"));
+			estilos.add(new Estilo("infanto juvenil"));
+			estilos.add(new Estilo("drama"));
+			estilos.add(new Estilo("terror"));
+			estilos.add(new Estilo("animação"));
+			
 			for(Estilo e :estilos) {
 				facede = new Facede(e);
 				facede.salvar(e);
 			}
+			List<Trofeu> trofeus = new ArrayList<Trofeu>();
 			
+			trofeus.add(new Trofeu("ficcao cientifica","ficcao.jpg"));
+			trofeus.add(new Trofeu("romance","romance.jpg"));
+			trofeus.add(new Trofeu("aventura","aventura.jog"));
+			trofeus.add(new Trofeu("comédia","comedia.jpg"));
+			trofeus.add(new Trofeu("ação","acao.jpg"));
+			trofeus.add(new Trofeu("infanto juvenil","infanto.jpg"));
+			trofeus.add(new Trofeu("drama","drama.jpg"));
+			trofeus.add(new Trofeu("terror","terror.jpg"));
+			trofeus.add(new Trofeu("animação","animacao.jpeg"));
+			
+			for(Trofeu e :trofeus) {
+				facede = new Facede(e);
+				facede.salvar(e);
+			}
 		}
 		lista =null;
 		Usuario user = new Usuario("admin","admin");

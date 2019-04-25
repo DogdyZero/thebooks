@@ -43,6 +43,20 @@ public class LivroController {
 		this.usuario =(Usuario)FacesContext.getCurrentInstance().
 				getExternalContext().getSessionMap().get("usuario");
 		
+		opcoes = new ArrayList<String>();
+		opcoes.add("por nome");
+		opcoes.add("por estilo");
+		
+		atualizarTabelaEstilos();
+		
+		atualizarTabelaLivros();
+		
+		atualizarRanking();
+		
+		atualizarTrofeus();
+
+	}
+	private void atualizarTabelaEstilos() {
 		this.facede = new Facede(estilo);
 		this.resultado = this.facede.listaEntidades(estilo, "simples");
 		if(resultado!=null) {
@@ -52,6 +66,8 @@ public class LivroController {
 				listaEstilos.add(e.getCategoriaLivro());
 			}
 		}
+	}
+	private void atualizarTabelaLivros() {
 		Livro l = new Livro();
 		this.facede = new Facede(l);
 		List<EntidadeDominio> lista = this.facede.listaEntidades(l, "simples");
@@ -62,10 +78,8 @@ public class LivroController {
 				livros.add(l2);
 			}
 		}
-		opcoes = new ArrayList<String>();
-		opcoes.add("por nome");
-		opcoes.add("por estilo");
-		
+	}
+	private void atualizarRanking() {
 		Usuario user = new Usuario();
 		user.setPerfil("normal");
 		this.facede = new Facede(user);
@@ -77,6 +91,8 @@ public class LivroController {
 				usuarios.add(u2);
 			}
 		}
+	}
+	private void atualizarTrofeus() {
 		List<Trofeu> meusTrofeus = this.usuario.getTrofeus();
 		if(meusTrofeus!=null) {
 			trofeus = new ArrayList<Trofeu>();
@@ -84,8 +100,8 @@ public class LivroController {
 				trofeus.add(trofeu);
 			}
 		}
-
 	}
+	
 	public void salvar() {
 		for(EntidadeDominio entidade: this.resultado) {
 			 Estilo e = (Estilo)entidade;
@@ -97,7 +113,7 @@ public class LivroController {
 		String resultado = this.facede.salvar(this.livro);
 		if(resultado ==null){
 			try {
-				this.livros.add(this.livro);
+				atualizarTabelaLivros();
 				FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -181,16 +197,18 @@ public class LivroController {
 			for(Livro l :meusLivros) {
 				if(livro.getNomeLivro().equals(l.getNomeLivro())) {
 					this.mensagem = "Atenção: Você não tem como marcar novamente o livro!";
-					return;
 				}
 			}
-			meusLivros.add(livro);
+			if(this.mensagem==null) {
+				meusLivros.add(livro);
 
-			this.usuario.setLivros(meusLivros);
-			
-			this.facede = new Facede(this.usuario);
-			this.facede.alterar(this.usuario);
-			this.mensagem = "Aviso: Livro marcado com sucesso!";
+				this.usuario.setLivros(meusLivros);
+				
+				this.facede = new Facede(this.usuario);
+				this.facede.alterar(this.usuario);
+				this.mensagem = "Aviso: Livro marcado com sucesso!";
+				
+			}
 
 			
 		} else if (livrosLidos==true) {
@@ -198,6 +216,8 @@ public class LivroController {
 			
 		}
 		try {
+			atualizarRanking();
+			atualizarTrofeus();
 			FacesContext.getCurrentInstance().getExternalContext().redirect("lista-livros.xhtml");
 		} catch (IOException e2) {
 			e2.printStackTrace();

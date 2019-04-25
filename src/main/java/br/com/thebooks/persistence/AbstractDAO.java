@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import br.com.thebooks.domain.EntidadeDominio;
 import br.com.thebooks.factory.IFactoryQuery;
@@ -19,7 +18,7 @@ public abstract class AbstractDAO implements IDAO{
 	protected Session session;
 
 	protected void iniciarTransacao() {
-		SessionSingleton ss = SessionSingleton.getInstanceSession();
+		SessionConfigApplication ss = SessionConfigApplication.getInstanceSession();
 		this.session = ss.getInstanceSessionFactory().openSession();
 		this.session.beginTransaction();
 	}
@@ -27,7 +26,6 @@ public abstract class AbstractDAO implements IDAO{
 		this.session.getTransaction().commit();
 		this.session.flush();
 		this.session.close();
-		this.sessionFactory.close();
 	}
 	
 	@Override

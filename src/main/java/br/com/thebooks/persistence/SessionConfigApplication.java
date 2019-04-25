@@ -3,20 +3,20 @@ package br.com.thebooks.persistence;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class SessionSingleton {
+public class SessionConfigApplication {
 	private SessionFactory sessionFactory;
-	private static SessionSingleton sessionSingleton;
+	private static SessionConfigApplication sessionConfig;
 	
-	private SessionSingleton(){
+	private SessionConfigApplication(){
 		if(sessionFactory == null || sessionFactory.isClosed()){
 			this.sessionFactory = new Configuration().configure().buildSessionFactory();
 		}
 	}
-	public static SessionSingleton getInstanceSession(){
-		if(sessionSingleton == null){
-			sessionSingleton = new SessionSingleton();
+	public static SessionConfigApplication getInstanceSession(){
+		if(sessionConfig == null){
+			sessionConfig = new SessionConfigApplication();
 		}
-		return sessionSingleton;
+		return sessionConfig;
 		
 	}
 	public SessionFactory getInstanceSessionFactory(){
