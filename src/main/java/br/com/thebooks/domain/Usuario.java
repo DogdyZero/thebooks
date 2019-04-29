@@ -22,7 +22,7 @@ public class Usuario extends EntidadeDominio{
 	private String senha;
 	private String perfil;
 	private int pontos;
-	@ManyToMany (cascade=CascadeType.ALL,
+	@ManyToMany (
 			fetch=FetchType.EAGER)
 	@JoinTable(name="usuario_trofeu",
 			joinColumns={@JoinColumn(name="id_usuario", 
@@ -31,7 +31,7 @@ public class Usuario extends EntidadeDominio{
            referencedColumnName="id_trofeu")})
 	private List<Trofeu> trofeus;
 	
-	@ManyToMany (cascade=CascadeType.ALL,
+	@ManyToMany (
 			fetch=FetchType.EAGER)
 	@JoinTable(name="usuario_livro",
 			 joinColumns={@JoinColumn(name="id_usuario", 

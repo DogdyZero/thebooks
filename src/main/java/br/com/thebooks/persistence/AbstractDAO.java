@@ -26,6 +26,7 @@ public abstract class AbstractDAO implements IDAO{
 		this.session.getTransaction().commit();
 		this.session.flush();
 		this.session.close();
+		
 	}
 	
 	@Override
@@ -44,6 +45,7 @@ public abstract class AbstractDAO implements IDAO{
 	public String alterar(EntidadeDominio entidade) {
 		try {
 			iniciarTransacao();
+			
 			this.session.update(entidade);
 
 			finalizarTransacao();
